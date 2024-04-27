@@ -2,6 +2,7 @@ package de.bgy22.evolution.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -18,26 +19,25 @@ import de.bgy22.evolution.Main;
 public class FirstScreen implements Screen {
 
     Stage stage;
-    TextButton.TextButtonStyle textButtonStyle;
-    BitmapFont font;
-    Skin skin;
-    TextureAtlas buttonAtlas;
 
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
-        Table table = new Table();
-        table.setFillParent(true);
         Gdx.input.setInputProcessor(stage);
-        font = new BitmapFont();
-        skin = new Skin();
-        //buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.pack"));
-        //skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
+        Table table = new Table();
+        Skin skin = new Skin();
+        BitmapFont font = new BitmapFont();
+        TextureAtlas buttonAtlas = new TextureAtlas(Gdx.files.internal("button.pack"));
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+
+        table.setFillParent(true);
+        skin.addRegions(buttonAtlas);
+
         textButtonStyle.font = font;
-//        textButtonStyle.up = skin.getDrawable("up-button");
-//        textButtonStyle.down = skin.getDrawable("down-button");
-//        textButtonStyle.checked = skin.getDrawable("checked-button");
+        textButtonStyle.up = skin.getDrawable("buttonnormal");
+        textButtonStyle.down = skin.getDrawable("buttonpressed");
+        textButtonStyle.fontColor = Color.BLACK;
+
         TextButton textButton = new TextButton("Flappy Bird", textButtonStyle);
         textButton.addListener(new ChangeListener() {
             @Override
