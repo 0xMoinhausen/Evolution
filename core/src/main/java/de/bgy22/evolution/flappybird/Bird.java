@@ -9,7 +9,8 @@ import de.bgy22.evolution.screens.FlappyBirdScreen;
 public abstract class Bird {
 
     private Sprite sprite;
-    private final float jumpForce = 220.2f;
+    private final float jumpForce = 2.2f;
+    private float speedY = 0f;
     private Circle hitBox;
 
     public Bird(Sprite sprite, Vector2 position) {
@@ -18,7 +19,8 @@ public abstract class Bird {
     }
 
     public void update(float delta) {
-        hitBox.y += FlappyBirdScreen.GRAVITY * delta;
+        speedY += FlappyBirdScreen.GRAVITY * delta;
+        hitBox.y += speedY;
         sprite.setPosition(hitBox.x, hitBox.y);
     }
 
@@ -27,6 +29,6 @@ public abstract class Bird {
     }
 
     protected void jump(float delta) {
-        hitBox.y += jumpForce * delta;
+        speedY = jumpForce;
     }
 }

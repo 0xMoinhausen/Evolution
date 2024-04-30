@@ -12,7 +12,7 @@ import de.bgy22.evolution.flappybird.PlayerBird;
 
 public class FlappyBirdScreen implements Screen {
 
-    public static final float GRAVITY = -2.0f;
+    public static final float GRAVITY = -4.0f;
 
     private Texture aiBirdImage;
     private Texture playerBirdImage;
