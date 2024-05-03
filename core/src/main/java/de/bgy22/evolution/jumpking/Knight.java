@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
@@ -36,11 +37,13 @@ public class Knight {
     private float chargeTime = 0f;
     protected boolean isChargingJump = false;
     protected boolean isGrounded = false;
+    private boolean colliding = false;
 
     public void render(Batch batch) {knightSprite.draw(batch);}
 
     public void update(float delta) {
-
+        lastPos.x = hitBox.x;
+        lastPos.y = hitBox.y;
         hitBox.setPosition(hitBox.x + currentSpeed.x, hitBox.y + currentSpeed.y);
         knightSprite.setPosition(hitBox.x, hitBox.y);
 
@@ -49,7 +52,16 @@ public class Knight {
         }
         else{
             currentSpeed.y = Math.max(maxFallingVelocity, currentSpeed.y + gravity * delta);
+            if(colliding){
+                currentSpeed.x *= 1;
+            }
         }
+    }
+    /**
+     * Checks the collision and updates internal boolean
+     * */
+    public void collisionCheck(Rectangle shape){
+        colliding = hitBox.contains(shape);
     }
 
     protected void chargeJump(float delta){
