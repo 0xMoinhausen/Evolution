@@ -42,7 +42,7 @@ public class FirstScreen implements Screen {
         textButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Main.Instance.setScreen(new FlappyBirdScreen());
+                Main.Instance.setScreen(new JumpKingScreen());
             }
         });
         table.add(textButton).center();
